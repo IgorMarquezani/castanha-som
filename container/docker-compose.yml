@@ -1,0 +1,14 @@
+version: '3'
+services:
+  postgres:
+    image: "postgres"
+    container_name: "castanha-som-db"
+    restart: always
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=castanha
+    ports:
+      - "9090:5432"
+    volumes:
+      - ./migration/init.sql:/docker-entrypoint-initdb.d/init.sql
