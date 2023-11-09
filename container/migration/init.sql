@@ -7,6 +7,12 @@ CREATE TABLE users (
   passwd TEXT NOT NULL
 );
 
+CREATE TABLE user_features (
+  admin_access BOOLEAN NOT NULL,
+  user_id UUID NOT NULL,
+  FOREIGN KEY(user_id) REFERENCES users(id)
+)
+
 CREATE TABLE sessions (
   key_access UUID UNIQUE NOT NULL,
   expires_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,
@@ -15,12 +21,16 @@ CREATE TABLE sessions (
 );
 
 CREATE TABLE products (
-  category TEXT NOT NULL,
-  brand TEXT NOT NULL,
   name TEXT NOT NULL,
-  price MONEY,
-  description TEXT,
+  full_price MONEY,
+  installment_pritce MONEY,
   PRIMARY KEY(name)
+);
+
+CREATE TABLE descriptions (
+  product_name TEXT NOT NULL,
+  value TEXT NOT NULL,
+  FOREIGN KEY(product_name) REFERENCES products(name)
 );
 
 CREATE TABLE addresses (

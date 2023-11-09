@@ -31,7 +31,5 @@ func main() {
 
 	routes.UserRoutes(e)
 
-	e.File("/", "./views/static/html/login.html")
-
 	e.Logger.Fatal(e.Start(":8080"))
 }

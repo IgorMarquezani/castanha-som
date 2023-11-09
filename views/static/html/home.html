@@ -1,33 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
   <title></title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
-<body>
-  <div class="container">
-    <div class="row" style="height: 80%;">
-      <div class="card col-sm" style="width: 100%; height: 100%;">
-        <img class="card-img-bot" style="width: 100%; height: 100%;" src="/static/images/black-and-white-guitar.png"
-          alt="Card image guitar">
+<body style="background-color: #504A4A;">
+  <div class="container-fluid mt-5 p-5">
+    <div class="row justify-content-md-center">
+      <div class="col col-sm-3 mr-5">
+        <a href="/products/guitars" style="text-decoration: none; color: black;">
+          <div class="card" style="width: 100%; height: 100%;">
+            <img class="card-img-bot" style="width: 100%; height: 100%;" src="/static/images/black-and-white-guitar.png"
+              alt="Card image guitar">
+            <div class="card-header" style="height: 10%;">
+              <p class="card-text text-center">Violões</p>
+            </div>
+          </div>
+        </a>
       </div>
-      <div class="card col-sm" style="width: 18rem;">
-        <div class="card-body" style="height: 12rem;">
-          <h5 class="card-title">Card title</h5>
-        </div>
-        <img class="card-img-bot" src="/static/images/gray-eletric-guitar-bg-1920x1200.png" alt="Card image cap">
+      <div class="col col-sm-3">
+        <a href="/products/eletric-guitars" style="text-decoration: none; color: black;">
+          <div class="card" style="width: 100%; height: 100%;">
+            <img class="card-img-bot" style="width: 100%; height: 100%;"
+              src="/static/images/black-and-white-eletric-guitar.png" alt="Card image eletric guitar">
+            <div class="card-header" style="height: 10%;">
+              <p class="card-text text-center">Guitarras</p>
+            </div>
+          </div>
+        </a>
       </div>
-      <div class="card col-sm" style="width: 18rem;">
-        <div class="card-body" style="height: 12rem;">
-          <h5 class="card-title">Card title</h5>
-        </div>
-        <img class="card-img-bot" src="/static/images/gray-eletric-guitar-bg-1920x1200.png" alt="Card image cap">
+      <div class="col col-sm-3 ml-5">
+        <a href="/products/basses" style="text-decoration: none; color: black;">
+          <div class="card" style="width: 100%; height: 100%;">
+            <img class="card-img-bot" style="width: 100%; height: 100%;" src="/static/images/black-and-white-bass.png"
+              alt="Card image bass">
+            <div class="card-header" style="height: 10%;">
+              <p class="card-text text-center">Baixos</p>
+            </div>
+          </div>
       </div>
+      </a>
     </div>
   </div>
 </body>
