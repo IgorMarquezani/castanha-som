@@ -2,7 +2,6 @@
 <html lang="pt-BR">
 
 <head>
-  <title></title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cadastrar produto</title>
@@ -16,7 +15,7 @@
       <div class="d-inline-flex col col-4">
         <div class="card" style="background-color: white; height: 550px;">
           <div class="card-body">
-            <h5 class="card-title">Recomenda-se imagens de 300x300</h5>
+            <p class="text-center fs-6">Recomenda-se imagens de 300x300</p>
           </div>
           <div style="height: 400px;">
             <img src="/static/images/violao-test.jpeg" style="object-fit: cover; width: 100%; height: 100%;"
@@ -31,7 +30,7 @@
         </div>
       </div>
       <div class="col col-7">
-        <div class="card" id="form_2" style="background-color: white; height: 440px;">
+        <div class="card" id="form_2" style="background-color: white; height: 530px;">
           <div class="card-body">
             <div class="card-text">
               <div class="row justify-content-md-center mb-1">
@@ -39,6 +38,13 @@
                   <label for="" class="form-label">Nome:</label>
                   <input type="text" class="form-control" id="name">
                   <label class="form-label text-danger" id="name_err"></label>
+                </div>
+              </div>
+              <div class="row justify-content-md-start mb-2">
+                <div class="col com-md-12 text-start">
+                  <label for="type" class="form-label">Tipo: (ex: Guitarra)</label>
+                  <input type="text" class="form-control" id="type">
+                  <label class="form-label text-danger" id="type_err"></label>
                 </div>
               </div>
               <div class="row justify-content-md-center mb-1">

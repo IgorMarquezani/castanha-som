@@ -22,8 +22,9 @@ CREATE TABLE sessions (
 
 CREATE TABLE products (
   name TEXT NOT NULL,
-  full_price MONEY,
-  installment_pritce MONEY,
+  type TEXT NOT NULL,
+  full_price MONEY NOT NULL,
+  installment_pritce MONEY NOT NULL,
   PRIMARY KEY(name)
 );
 

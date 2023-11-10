@@ -3,7 +3,8 @@
 const uploadBtn = document.getElementById("upload_btn")
 const nameErr = document.getElementById("name_err")
 const inCashErr = document.getElementById("in_cash_err")
-const InstallmentsErr = document.getElementById("installments_err")
+const installmentsErr = document.getElementById("installments_err")
+const typeErr = document.getElementById("type_err")
 
 // this map is meant to be use to keep track of the descriptions provided by the user
 // making it possible to avoid repeated fields being created
@@ -72,7 +73,8 @@ function deleteDescription(descriptionId) {
 function register() {
   nameErr.innerHTML = ""
   inCashErr.innerHTML = ""
-  InstallmentsErr.innerHTML = ""
+  installmentsErr.innerHTML = ""
+  typeErr.innerHTML = ""
 
   var errors = 0
 
@@ -80,14 +82,20 @@ function register() {
 
   if (files.length < 1) {
     alert("Por favor, selecione uma imagem para o produto")
-    return
+    errors++
   }
 
   var file = files[0]
 
   var name = document.getElementById("name").value
   if (name.length < 1) {
-    nameErr.innerHTML = "O nome produto não pode ser vazio"
+    nameErr.innerHTML = "O nome do produto não pode ser nulo"
+    errors++
+  }
+
+  var type = document.getElementById("type").value
+  if (type.length < 1) {
+    typeErr.innerHTML = "O tipo do produto não pode ser nulo"
     errors++
   }
 
@@ -101,9 +109,9 @@ function register() {
 
   var installmentsValue = document.getElementById("installments_value").value
   if (installmentsValue.length < 1) {
-    InstallmentsErr.innerHTML = "Preencha este campo"
+    installmentsErr.innerHTML = "Preencha este campo"
   } else if (!isInt(installmentsValue)) {
-    InstallmentsErr.innerHTML = "Este campo só aceita digitos númericos"
+    installmentsErr.innerHTML = "Este campo só aceita digitos númericos"
     errors++
   }
 
@@ -117,7 +125,8 @@ function register() {
   }
 
   var body = {
-    name: "",
+    name: name,
+    type: type,
     in_cash_value: parseInt(inCashValue),
     installments_value: parseInt(installmentsValue),
     descriptions: descriptions
