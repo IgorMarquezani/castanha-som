@@ -24,7 +24,7 @@ CREATE TABLE products (
   name TEXT NOT NULL,
   type TEXT NOT NULL,
   full_price MONEY NOT NULL,
-  installment_pritce MONEY NOT NULL,
+  installment_price MONEY NOT NULL,
   PRIMARY KEY(name)
 );
 
