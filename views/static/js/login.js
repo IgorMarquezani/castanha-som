@@ -11,9 +11,11 @@ function login() {
   fetch("/user/login", {
     method: "POST",
     body: form,
+    credentials: "same-origin",
+    cache: "no-cache"
   }).then((resp) => {
     if (resp.status == 200) {
-      window.location.href = "/static/html/home.html"
+      window.location.href = "/home"
     } else if (resp.status == 401) {
       err.innerHTML = "Credências invalidas"
     } else {

@@ -3,6 +3,7 @@ package user
 import (
 	"context"
 	"errors"
+	"time"
 
 	"gorm.io/gorm"
 )
@@ -19,6 +20,15 @@ func NewRepository(db *gorm.DB) (*repository, error) {
 	return &repository{
 		db: db,
 	}, nil
+}
+
+func (u *repository) SelectByID(ctx context.Context, userId string) (User, error) {
+	var user User
+
+	ctx, cancel := context.WithTimeout(ctx, time.Second*10)
+	defer cancel()
+
+	return user, u.db.WithContext(ctx).Where("id = ?", userId).First(&user).Error
 }
 
 func (r *repository) SelectByEmail(ctx context.Context, email string) (User, error) {

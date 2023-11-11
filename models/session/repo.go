@@ -1,9 +1,9 @@
 package session
 
 import (
+	"context"
 	"errors"
-  "context"
-  "time"
+	"time"
 
 	"gorm.io/gorm"
 )
@@ -38,6 +38,15 @@ func (r *repository) SelectByUserId(ctx context.Context, userId string) (Session
 	err := r.db.WithContext(ctx).Where("user_id = ?", userId).First(&session).Error
 
 	return session, err
+}
+
+func (r *repository) SelectByKeyAccess(ctx context.Context, sessionId string) (Session, error) {
+	ctx, cancel := context.WithTimeout(ctx, time.Second*10)
+	defer cancel()
+
+	session := Session{}
+
+	return session, r.db.WithContext(ctx).Where("key_access = ?", sessionId).First(&session).Error
 }
 
 func (r *repository) UpdateDuration(ctx context.Context, userId, newDuration string) error {
