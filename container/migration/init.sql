@@ -8,10 +8,11 @@ CREATE TABLE users (
 );
 
 CREATE TABLE user_features (
-  admin_access BOOLEAN NOT NULL,
+  admin_access BOOLEAN NOT NULL DEFAULT false,
   user_id UUID NOT NULL,
   FOREIGN KEY(user_id) REFERENCES users(id)
-)
+  PRIMARY KEY(user_id)
+);
 
 CREATE TABLE sessions (
   key_access UUID UNIQUE NOT NULL,
@@ -58,7 +59,6 @@ CREATE TABLE cart_items (
   FOREIGN KEY(product_name) REFERENCES products(name),
   PRIMARY KEY(cart_id, product_name)
 );
-
 
 CREATE TABLE purchases (
   id UUID NOT NULL,

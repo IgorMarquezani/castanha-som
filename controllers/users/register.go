@@ -12,6 +12,7 @@ import (
 	"castanha/database"
 	"castanha/hasher"
 	"castanha/models/user"
+	features "castanha/models/user_features"
 )
 
 func Register(c echo.Context) error {
@@ -42,7 +43,7 @@ func Register(c echo.Context) error {
 		return c.JSONPretty(http.StatusBadRequest, err, "")
 	}
 
-	repo, err := user.NewRepository(database.GetDB())
+	userRepo, err := user.NewRepository(database.GetDB())
 	if err != nil {
 		return c.String(http.StatusInternalServerError, "internal server error")
 	}
@@ -59,13 +60,27 @@ func Register(c echo.Context) error {
 		Passwd: hash,
 	}
 
-	if err := repo.Create(ctx, &u); err != nil {
+	if err := userRepo.Create(ctx, &u); err != nil {
 		if errors.Is(err, gorm.ErrDuplicatedKey) {
 			return c.String(http.StatusAlreadyReported, "email already in use")
 		}
 
 		return c.String(http.StatusInternalServerError, "internal server error")
 	}
+
+  featuresRepo, err := features.NewRepository(database.GetDB())
+  if err != nil {
+		return c.String(http.StatusInternalServerError, "internal server error")
+  }
+
+  userFeatures := features.UserFeatures {
+    AdminAccess: false,
+    UserID: u.ID,
+  }
+
+  if err := featuresRepo.Create(ctx, &userFeatures); err != nil {
+		return c.String(http.StatusInternalServerError, "internal server error")
+  }
 
 	return c.String(http.StatusCreated, "user created")
 }
