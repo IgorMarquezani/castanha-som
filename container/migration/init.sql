@@ -24,8 +24,8 @@ CREATE TABLE sessions (
 CREATE TABLE products (
   name TEXT NOT NULL,
   type TEXT NOT NULL,
-  in_cash_value MONEY NOT NULL,
-  installment_value MONEY NOT NULL,
+  in_cash_value DECIMAL(1000, 2) NOT NULL,
+  installment_value DECIMAL(1000, 2) NOT NULL,
   image_name TEXT NOT NULL,
   PRIMARY KEY(name)
 );
