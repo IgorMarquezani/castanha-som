@@ -10,6 +10,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/labstack/echo/v4"
 	"gorm.io/gorm"
@@ -33,7 +34,10 @@ func Register(c echo.Context) error {
 		return c.String(http.StatusBadRequest, "please send the product image")
 	}
 
-	file, err := os.OpenFile("./views/static/images/products/"+srcHeader.Filename, os.O_RDONLY, os.ModeSetuid)
+	str := strings.Split(srcHeader.Filename, ".")
+	fileName := p.Name + "." + str[len(str)-1]
+
+	file, err := os.OpenFile("./views/static/images/products/"+fileName, os.O_RDONLY, os.ModeSetuid)
 	if err != nil && !errors.Is(err, os.ErrNotExist) {
 		return c.String(http.StatusInternalServerError, "internal server error")
 	}
@@ -49,7 +53,7 @@ func Register(c echo.Context) error {
 	}
 	defer src.Close()
 
-	dst, err := os.Create("./views/static/images/products/" + srcHeader.Filename)
+	dst, err := os.Create("./views/static/images/products/" + fileName)
 	if err != nil {
 		return c.String(http.StatusInternalServerError, "internal server error")
 	}
@@ -59,15 +63,15 @@ func Register(c echo.Context) error {
 
 	productRepo, err := product.NewRepository(database.GetDB())
 	if err != nil {
-		os.Remove("./views/static/images/products/" + srcHeader.Filename)
+		os.Remove("./views/static/images/products/" + fileName)
 		return c.String(http.StatusInternalServerError, "internal server error")
 	}
 
-	p.ImageName = srcHeader.Filename
+	p.ImageName = fileName
 
 	err = productRepo.Create(ctx, &p)
 	if err != nil {
-		os.Remove("./views/static/images/products/" + srcHeader.Filename)
+		os.Remove("./views/static/images/products/" + fileName)
 
 		if errors.Is(err, gorm.ErrDuplicatedKey) {
 			return c.String(http.StatusAlreadyReported, "named product already exist")
