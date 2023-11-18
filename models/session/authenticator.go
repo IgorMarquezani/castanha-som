@@ -91,7 +91,7 @@ func (a *authenticator) AuthAdminSession(c echo.Context) (int, error) {
 
 	f, err := featuresRepo.SelectByUserID(ctx, u.ID)
 	if err != nil {
-		return http.StatusInternalServerError, err
+		return http.StatusInternalServerError, errors.New("not a admin")
 	}
 
 	if !f.AdminAccess {

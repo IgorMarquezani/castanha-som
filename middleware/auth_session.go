@@ -36,10 +36,6 @@ func AuthAdmin(next echo.HandlerFunc) echo.HandlerFunc {
 		}
 
 		status, err := auth.AuthAdminSession(c)
-		if status == http.StatusUnauthorized {
-			return c.Redirect(http.StatusPermanentRedirect, "/static/html/401.html")
-		}
-
 		if status != http.StatusOK || err != nil {
 			return c.String(status, err.Error())
 		}
