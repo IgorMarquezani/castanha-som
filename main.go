@@ -47,6 +47,7 @@ func main() {
 
 	routes.UserRoutes(e)
 	routes.ServerSideRender(e)
+	routes.ProductRoutes(e)
 
 	e.Logger.Fatal(e.Start(":8080"))
 }

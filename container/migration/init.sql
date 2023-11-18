@@ -24,15 +24,17 @@ CREATE TABLE sessions (
 CREATE TABLE products (
   name TEXT NOT NULL,
   type TEXT NOT NULL,
-  full_price MONEY NOT NULL,
-  installment_price MONEY NOT NULL,
+  in_cash_value MONEY NOT NULL,
+  installment_value MONEY NOT NULL,
+  image_name TEXT NOT NULL,
   PRIMARY KEY(name)
 );
 
-CREATE TABLE descriptions (
+CREATE TABLE product_descriptions (
   product_name TEXT NOT NULL,
   value TEXT NOT NULL,
-  FOREIGN KEY(product_name) REFERENCES products(name)
+  FOREIGN KEY(product_name) REFERENCES products(name),
+  PRIMARY KEY(product_name, value)
 );
 
 CREATE TABLE addresses (

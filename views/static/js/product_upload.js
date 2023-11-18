@@ -121,18 +121,34 @@ function register() {
 
   var descriptions = []
   for (let entrie of descriptionsTrack.values()) {
-    descriptions.push(entrie)
+    let description = {
+      value: entrie
+    }
+    descriptions.push(description)
   }
 
   var body = {
     name: name,
     type: type,
-    in_cash_value: parseInt(inCashValue),
-    installments_value: parseInt(installmentsValue),
+    in_cash_value: parseFloat(inCashValue),
+    installment_value: parseFloat(installmentsValue),
     descriptions: descriptions
   }
 
   var form = new FormData()
   form.set("image", file)
   form.set("data", JSON.stringify(body))
+
+  fetch("/product/register", {
+    method: "POST",
+    body: form,
+  }).then((resp) => {
+    if (resp.status == 208) {
+      alert("Produto já cadastrado")
+    } else if (resp.status == 200 || resp.status == 201) {
+      alert("Produto cadastrado com sucesso")
+    } else {
+      alert("Erro inesperado, pedimos desculpa")
+    }
+  })
 }

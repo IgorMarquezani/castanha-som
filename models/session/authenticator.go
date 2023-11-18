@@ -5,6 +5,10 @@ import (
 	"errors"
 	"net/http"
 
+	"castanha/database"
+	"castanha/models/user"
+	features "castanha/models/user_features"
+
 	"github.com/labstack/echo/v4"
 	"gorm.io/gorm"
 )
@@ -43,6 +47,55 @@ func (a *authenticator) AuthSession(c echo.Context) (int, error) {
 		}
 
 		return http.StatusInternalServerError, errors.New("internal server error")
+	}
+
+	return http.StatusOK, nil
+}
+
+func (a *authenticator) AuthAdminSession(c echo.Context) (int, error) {
+	var ctx = c.Request().Context()
+
+	cookie, err := c.Cookie("_Secure1")
+	if err != nil {
+		return http.StatusUnauthorized, errors.New("missing session cookie")
+	}
+
+	sessionRepo, err := NewRepository(a.DB)
+	if err != nil {
+		return http.StatusInternalServerError, errors.New("internal server error")
+	}
+
+	s, err := sessionRepo.SelectByKeyAccess(a.ctx, cookie.Value)
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return http.StatusUnauthorized, errors.New("invalid session cookie key accesss")
+		}
+
+		return http.StatusInternalServerError, errors.New("internal server error")
+	}
+
+	userRepo, err := user.NewRepository(database.GetDB())
+	if err != nil {
+		return http.StatusInternalServerError, err
+	}
+
+	u, err := userRepo.SelectByID(ctx, s.UserId)
+	if err != nil {
+		return http.StatusInternalServerError, err
+	}
+
+	featuresRepo, err := features.NewRepository(database.GetDB())
+	if err != nil {
+		return http.StatusInternalServerError, err
+	}
+
+	f, err := featuresRepo.SelectByUserID(ctx, u.ID)
+	if err != nil {
+		return http.StatusInternalServerError, err
+	}
+
+	if !f.AdminAccess {
+		return http.StatusUnauthorized, err
 	}
 
 	return http.StatusOK, nil

@@ -1,13 +1,16 @@
 package routes
 
 import (
+	"castanha/controllers/products"
 	"castanha/controllers/render"
 	"castanha/controllers/users"
+	cmiddleware "castanha/middleware"
 	"github.com/labstack/echo/v4"
 )
 
 func ServerSideRender(e *echo.Echo) {
 	e.GET("/home", render.Home)
+	e.GET("/products/upload", render.ProductForm)
 }
 
 func UserRoutes(e *echo.Echo) {
@@ -17,4 +20,8 @@ func UserRoutes(e *echo.Echo) {
 
 	g := e.Group("/user/info/personal")
 	g.GET("/my_name", users.OwnUserName)
+}
+
+func ProductRoutes(e *echo.Echo) {
+	e.POST("/product/register", products.Register, cmiddleware.AuthAdmin)
 }
