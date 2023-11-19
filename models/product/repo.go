@@ -27,6 +27,17 @@ func (r *Repository) Create(ctx context.Context, product *Product) error {
 	return r.db.WithContext(ctx).Create(&product).Error
 }
 
+func (r *Repository) SelectByType(ctx context.Context, Type string) ([]Product, error) {
+	ctx, cancel := context.WithTimeout(ctx, time.Second*10)
+	defer cancel()
+
+	products := make([]Product, 0, 10)
+
+	err := r.db.WithContext(ctx).Where("type = ?", Type).Find(&products).Error
+
+	return products, err
+}
+
 func (r *Repository) Delete(ctx context.Context, productName string) error {
 	ctx, cancel := context.WithTimeout(ctx, time.Second*10)
 	defer cancel()

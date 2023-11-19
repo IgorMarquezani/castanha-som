@@ -11,6 +11,7 @@ import (
 func ServerSideRender(e *echo.Echo) {
 	e.GET("/home", render.Home)
 	e.GET("/products/upload", render.ProductForm)
+	e.GET("/products/list", render.ListProducts)
 }
 
 func UserRoutes(e *echo.Echo) {
