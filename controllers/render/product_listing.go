@@ -8,7 +8,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type List struct {
+type productList struct {
 	Products []product.Product
 	Len      int
 }
@@ -16,7 +16,7 @@ type List struct {
 func ListProducts(c echo.Context) error {
 	var (
 		ctx = c.Request().Context()
-		l   List
+		l   productList
 	)
 
 	Type := c.QueryParam("type")

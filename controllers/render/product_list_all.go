@@ -12,7 +12,7 @@ import (
 func ListAllProducts(c echo.Context) error {
 	var (
 		ctx = c.Request().Context()
-		l   List
+		l   productList
 	)
 
 	productRepo, err := product.NewRepository(database.GetDB())
