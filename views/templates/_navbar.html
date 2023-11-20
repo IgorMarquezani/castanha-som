@@ -14,9 +14,9 @@
                 Instrumentos
               </a>
               <ul class="dropdown-menu" id="instrumentos">
-                <li><a class="dropdown-item" href="/products/instruments/guitars">Violão</a></li>
-                <li><a class="dropdown-item" href="/products/instruments/basses">Baixo</a></li>
-                <li><a class="dropdown-item" href="/products/instruments/eletric_guitars">Guitarra</a></li>
+                <li><a class="dropdown-item" href="/products/list?type=Violão">Violão</a></li>
+                <li><a class="dropdown-item" href="/products/list?type=Guitarra">Guitarra</a></li>
+                <li><a class="dropdown-item" href="/products/list?type=Baixo">Baixo</a></li>
               </ul>
             </li>
             <li class="nav-item dropdown">
@@ -24,18 +24,18 @@
                 data-bs-toggle="dropdown" aria-expanded="false">
                 Acessórios
               </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/products/acessories/">Capotraste</a></li>
-                <li><a class="dropdown-item" href="/products/acessories/">Palheta</a></li>
-                <li><a class="dropdown-item" href="/products/acessories/">">Correia</a></li>
+              <ul class="dropdown-menu" id="acessorios">
+                <li><a class="dropdown-item" href="/products/list?type=Capotrastes/">Capotraste</a></li>
+                <li><a class="dropdown-item" href="/products/list?type=Palhetas/">Palheta</a></li>
+                <li><a class="dropdown-item" href="/products/list?type=Correias/">">Correia</a></li>
               </ul>
             </li>
         </div>
         </ul>
       </div>
-      <div class="d-flex" role="search" id="search-field">
+      <div class="d-flex" role="search">
         <input class="form-control me-2" type="search" id="search_field" placeholder="Buscar" aria-label="Buscar">
-        <button class="btn btn-outline-primary" type="submit">
+        <button class="btn btn-outline-primary" type="button" id="search_field_btn">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
             viewBox="0 0 16 16">
             <path

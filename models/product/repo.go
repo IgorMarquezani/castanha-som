@@ -49,10 +49,20 @@ func (r *Repository) SelectByType(ctx context.Context, Type string) ([]Product, 
 	return products, err
 }
 
-
 func (r *Repository) Delete(ctx context.Context, productName string) error {
 	ctx, cancel := context.WithTimeout(ctx, time.Second*10)
 	defer cancel()
 
 	return r.db.WithContext(ctx).Where("name = ?", productName).Delete(&Product{}).Error
+}
+
+func (r *Repository) RawSelect(ctx context.Context, rawSQL string, values ...any) ([]Product, error) {
+	ctx, cancel := context.WithTimeout(ctx, time.Second*10)
+	defer cancel()
+
+	products := make([]Product, 0, 10)
+
+	err := r.db.WithContext(ctx).Raw(rawSQL, values...).Find(&products).Error
+
+	return products, err
 }

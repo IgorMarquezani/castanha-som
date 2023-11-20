@@ -1,17 +1,27 @@
+const searchFieldBtn = document.getElementById("search_field_btn")
 const searchField = document.getElementById("search_field")
+
 const userName = document.getElementById("user_name")
 const userImage = document.getElementById("user_image")
 
+function search(value) {
+  if (value.length == 0) {
+    return window.location = "/products/list/all"
+  }
+
+  window.location = "/products/list/match?m=" + value
+}
+
 searchField.addEventListener("keypress", (event) => {
-  var text = searchField.value
+  if (event.key == "Enter") {
+    let value = searchField.value
+    search(value)
+  }
+})
 
-  fetch("/product/search/" + text, {
-    method: "GET"
-  }).then((resp) => {
-    resp.json().then((json) => {
-
-    })
-  })
+searchFieldBtn.addEventListener("click", () => {
+  let value = searchField.value
+  search(value)
 })
 
 function getUserName() {

@@ -13,6 +13,7 @@ func ServerSideRender(e *echo.Echo) {
 	e.GET("/products/upload", render.ProductForm)
 	e.GET("/products/list", render.ListProducts)
 	e.GET("/products/list/all", render.ListAllProducts)
+	e.GET("/products/list/match", render.SearchProduct)
 }
 
 func UserRoutes(e *echo.Echo) {
