@@ -12,24 +12,27 @@
 
 <body style="background-color: #504A4A;">
   {{template "_navbar" .}}
-  <div class="container-fluid mt-5 p-5">
+  <div class="container-fluid mt-2 p-5 ">
     {{if gt .Len 0}}
       <div class="row row-cols-4 justify-content-sm-start">
     {{range $i, $data := .Products}}
-        <div class="col col-sm-auto mb-5">
+        <div class="col mb-5">
           <div class="justify-content-md-center" style="width: 80%; height: 100%;">
-            <a href="/products/info?name={{$data.Name}}" style="text-decoration: none; color: black;">
-              <div class="card" style="height: 400px; width: 320px;">
-                <div style="height: 350px;" class="mt-3">
-                  <img class="card-img-center" style="width: 300px; height: 300px;"
+              <div class="card text-center" style="width: 290px; text-decoration: none; color: black;">
+                <div class="card-header" style="height: 66px;">
+                  {{$data.Name}}
+                </div>
+                <div class="mt-3">
+                  <img class="card-img-center" style="width: 280px; height: 300px;"
                     src="/static/images/products/{{$data.ImageName}}" alt="product image">
                 </div>
-                <div class="card-body text-center">
-                  <p class="cart-text fs-5">{{$data.Name}}</p>
-                  <p class="card-text fs-6">R$ {{$data.InCashValue}}</p>
+                <div class="card-body">
+                  <p class="card-text fs-6">R$ {{$data.InCashValue}} À Vista</p>
+                  <a href="/products/info?name={{$data.Name}}">
+                    <button type="button" class="btn btn-outline-success" style="width: 100%;">Comprar</button>
+                  </a>
                 </div>
               </div>
-            </a>
           </div>
         </div>
     {{end}}
