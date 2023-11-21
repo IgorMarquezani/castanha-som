@@ -14,6 +14,7 @@ func ServerSideRender(e *echo.Echo) {
 	e.GET("/products/list", render.ListProducts)
 	e.GET("/products/list/all", render.ListAllProducts)
 	e.GET("/products/list/match", render.SearchProduct)
+	e.GET("/products/info", render.ProductInfo)
 }
 
 func UserRoutes(e *echo.Echo) {

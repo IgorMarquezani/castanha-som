@@ -38,6 +38,17 @@ func (r *Repository) Select(ctx context.Context) ([]Product, error) {
 	return products, err
 }
 
+func (r *Repository) FirstByName(ctx context.Context, productName string) (Product, error) {
+	ctx, cancel := context.WithTimeout(ctx, time.Second*10)
+	defer cancel()
+
+	var p Product
+
+	err := r.db.WithContext(ctx).Where("name = ?", productName).First(&p).Error
+
+	return p, err
+}
+
 func (r *Repository) SelectByType(ctx context.Context, Type string) ([]Product, error) {
 	ctx, cancel := context.WithTimeout(ctx, time.Second*10)
 	defer cancel()
