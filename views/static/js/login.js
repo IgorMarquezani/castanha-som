@@ -11,7 +11,7 @@ function login() {
   fetch("/user/login", {
     method: "POST",
     body: form,
-    credentials: "same-origin",
+    credentials: "include",
     cache: "no-cache"
   }).then((resp) => {
     if (resp.status == 200) {
