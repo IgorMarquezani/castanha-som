@@ -26,3 +26,14 @@ func (r *Repository) Create(ctx context.Context, item *Item) error {
 
 	return r.db.WithContext(ctx).Table("cart_items").Create(item).Error
 }
+
+func (r *Repository) SelectByCarID(ctx context.Context, cartID string) ([]Item, error) {
+	ctx, cancel := context.WithTimeout(ctx, time.Second*10)
+	defer cancel()
+
+  items := make([]Item, 0, 0)
+
+  err := r.db.WithContext(ctx).Table("cart_items").Where("cart_id = ?", cartID).Find(&items).Error
+  
+  return items, err
+}
