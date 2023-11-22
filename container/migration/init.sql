@@ -55,7 +55,7 @@ CREATE TABLE carts (
 
 CREATE TABLE cart_items (
   cart_id UUID NOT NULL,
-  product_name INTEGER NOT NULL,
+  product_name TEXT NOT NULL,
   quantity INTEGER NOT NULL,
   FOREIGN KEY(cart_id) REFERENCES carts(id),
   FOREIGN KEY(product_name) REFERENCES products(name),

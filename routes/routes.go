@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"castanha/controllers/carts"
 	"castanha/controllers/products"
 	"castanha/controllers/render"
 	"castanha/controllers/users"
@@ -28,4 +29,8 @@ func UserRoutes(e *echo.Echo) {
 
 func ProductRoutes(e *echo.Echo) {
 	e.POST("/product/register", products.Register, cmiddleware.AuthAdmin)
+}
+
+func CartItemRoutes(e *echo.Echo) {
+	e.POST("/cart/add_item", carts.AddItem)
 }
